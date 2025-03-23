@@ -1,0 +1,28 @@
+[proc,init_goliath]
+  // Start the game
+  if (p_finduid(uid) = true) {
+    ~goliath_build_arena;
+    ~player_teleport_normal(^goliath_start_coord);
+    %goliath_next_wave_ready = true;
+    settimer(goliath_controller, 10);
+  }
+
+  queue(show_scroll, 1);
+  // npc_add(coord, goliath_fire_giant, 100);
+
+[queue,show_scroll]
+  if_close;
+  if_openmain(scroll);
+  if_settext(scroll:com_2, "GLOUGH! You tricked us! You conniving little gnome!");
+  if_settext(scroll:com_3, "We knew of his treachery,");
+  if_settext(scroll:com_4, "but we never questioned why the ships were built so large.");
+  if_settext(scroll:com_5, "Why would a gnome need ships fit for GIANTS?");
+  if_settext(scroll:com_6, "I always knew he was dangerous, but suicidal?");
+  if_settext(scroll:com_7, "No one—NO ONE—can control this many giants!");
+  if_settext(scroll:com_8, "Look at the ground, it's already breaking apart!");
+
+[label,reset_goliath]
+  %goliath_round = 0;
+  %goliath_npcs_alive = 0;
+  cleartimer(goliath_controller);
+  ~stop_burn_ground_line_by_line;

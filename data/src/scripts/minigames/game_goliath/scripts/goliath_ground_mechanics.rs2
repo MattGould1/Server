@@ -1,0 +1,46 @@
+// Rocks spawn under, move or get owned
+[proc,start_floor_crumbles]
+  settimer(floor_crumbles, 5);
+
+[proc,stop_floor_crumbles]
+  cleartimer(floor_crumbles);
+
+[queue,floor_crumbles_queue]
+  loc_add(%goliath_floor_crumbles_coord, plainrock1, 0, centrepiece_straight, 5);
+  if (%goliath_floor_crumbles_coord = coord) { 
+    ~damage_self(calc((stat(hitpoints) * 25) / 100));
+    ~push_player(coord);
+    say("Ouch...");
+  }
+
+[timer,floor_crumbles]
+  if (p_finduid(uid) = true & random(3) = 0) {
+    def_coord $floor_crumbles_coord = movecoord(coord, 0, 0, 0);
+    %goliath_floor_crumbles_coord = $floor_crumbles_coord;
+    loc_add($floor_crumbles_coord, loc_2376, 0, grounddecor, 1);
+    queue(floor_crumbles_queue, 1);
+  }
+
+// Waves begin moving across the screen, be careful!
+[proc,start_burn_ground_line_by_line]
+  settimer(burn_ground_line_by_line, 1);
+
+[proc,stop_burn_ground_line_by_line]
+  cleartimer(burn_ground_line_by_line);
+
+[timer,burn_ground_line_by_line]
+  if (p_finduid(uid) = true) {
+    def_int $line = 0;
+    while ($line < ^goliath_grid_size) {
+      if (movecoord(^goliath_npc_south_west_spawn_coord, %goliath_burn_line_by_line_index, 0, $line) = coord) {
+        ~damage_self(calc((stat(hitpoints) * 25) / 100));
+      }
+      loc_add(movecoord(^goliath_npc_south_west_spawn_coord, %goliath_burn_line_by_line_index, 0, $line), loc_2376, 0, grounddecor, 1);
+      $line = calc($line + 1);
+    }
+
+    %goliath_burn_line_by_line_index = calc(%goliath_burn_line_by_line_index + 1);
+    if (%goliath_burn_line_by_line_index > ^goliath_grid_size) {
+      %goliath_burn_line_by_line_index = 0;
+    }
+  }

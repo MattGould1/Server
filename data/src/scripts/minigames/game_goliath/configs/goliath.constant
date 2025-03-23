@@ -1,0 +1,14 @@
+^goliath_start_coord = 0_42_74_33_39
+
+^goliath_npc_spawn_coord = 0_42_74_33_39
+
+^goliath_grid_size = 30
+
+^goliath_npc_north_west_spawn_coord = 0_42_74_18_53
+^goliath_npc_north_east_spawn_coord = 0_42_74_47_53
+^goliath_npc_south_east_spawn_coord = 0_42_74_47_24
+^goliath_npc_south_west_spawn_coord = 0_42_74_18_24
+^goliath_npc_east_spawn_coord = 0_42_74_48_39
+^goliath_npc_south_spawn_coord = 0_42_74_33_23
+^goliath_npc_west_spawn_coord = 0_42_74_18_39
+^goliath_npc_north_spawn_coord = 0_42_74_33_54

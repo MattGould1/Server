@@ -1,0 +1,25 @@
+[debugproc,sg]
+  ~init_goliath;
+
+[proc,spawn_npcs]
+  def_coord $coord = 0_46_53_26_9;
+  def_int $rolls = 3;
+  def_int $roll = 0;
+  while($rolls > $roll) {
+    mes("Spawning goliath...");
+    npc_add(movecoord($coord, 0, 0, random(3)), giant, 100);
+    // npc_say("Fee fi fo fum, I smell the blood of an Englishman...");
+    // npc_setmode(opplayer2);
+    // npc_sethuntmode(aggressive_melee);
+    // npc_sethunt(10);
+    // npc_statadd(hitpoints, 10, 1);
+    $roll = calc($roll + 1);
+  }
+
+[debugproc,sg_close]
+  if (p_finduid(uid) = true) {
+    %goliath_round = 0;
+    %goliath_npcs_alive = 0;
+    cleartimer(goliath_controller);
+    cleartimer(floor_crumbles);
+  }

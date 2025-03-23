@@ -1,0 +1,24 @@
+[ai_queue1,goliath_fire_giant_wizard] ~npc_default_retaliate_ap;
+[ai_applayer2,goliath_fire_giant_wizard] ~goliath_fire_giant_wizard_fire_attack;
+[ai_opplayer2,goliath_fire_giant_wizard] ~goliath_fire_giant_wizard_fire_attack;
+
+[ai_queue3,goliath_fire_giant_wizard]
+gosub(npc_death);
+if (npc_findhero = false) {
+    return;
+}
+
+%goliath_npcs_alive = calc(%goliath_npcs_alive - 1); 
+
+[proc,goliath_fire_giant_wizard_fire_attack]
+if (%npc_action_delay > map_clock) {
+    npc_setmode(applayer2);
+    return;
+}
+if (~npc_can_attack_player = false) {
+    npc_setmode(null);
+    return;
+}
+
+~npc_cast_spell(^fire_wave, calc(random(4) + 1));
+npc_setmode(applayer2);

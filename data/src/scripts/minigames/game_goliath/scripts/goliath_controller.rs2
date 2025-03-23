@@ -1,0 +1,50 @@
+// Controls the state of the minigame
+[timer,goliath_controller]
+  // Round still in play
+  if (%goliath_npcs_alive > 0) {
+    return;
+  }
+
+  if (%goliath_npcs_alive = 0 & %goliath_next_wave_ready = false) {
+    mes("I have a few seconds to heal up and get ready...");
+    ~finish_round;
+    queue(goliath_next_wave_ready, 10);
+    return;
+  }
+
+  %goliath_round = calc(%goliath_round + 1);
+  // mes("I better be careful, I can see the ground moving!");
+  // mes("What in gielinor is coming NOW!?");
+
+  ~start_burn_ground_line_by_line;
+  ~start_floor_crumbles;
+
+  if (%goliath_round = 1) {
+    ~round_one; 
+  } else if (%goliath_round = 2) {
+    ~round_one; 
+  } else {
+    ~finish_game;
+    %goliath_round = 0;
+    %goliath_npcs_alive = 0;
+    cleartimer(goliath_controller); 
+    return;
+  }
+  mes("Wave <tostring(%goliath_round)> is arriving!");
+
+
+[proc,finish_game]
+  %goliath_next_wave_ready = false;
+  say("We... did it!?!");  
+  ~stop_burn_ground_line_by_line;
+  ~stop_floor_crumbles;
+
+[proc,finish_round]
+  %goliath_next_wave_ready = false;
+  mes("I have a few seconds to heal up and get ready...");
+  queue(goliath_next_wave_ready, 10);
+  ~stop_burn_ground_line_by_line;
+  ~stop_floor_crumbles;
+
+[queue,goliath_next_wave_ready]
+  %goliath_next_wave_ready = true;

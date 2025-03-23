@@ -1,0 +1,11 @@
+[ai_queue1,goliath_ogre_shaman_archer] ~npc_default_retaliate_ap;
+[ai_opplayer2,goliath_ogre_shaman_archer] npc_setmode(applayer2);
+[ai_applayer2,goliath_ogre_shaman_archer] ~npc_rangeattack;
+
+[ai_queue3,goliath_ogre_shaman_archer]
+gosub(npc_death);
+if (npc_findhero = false) {
+    return;
+}
+
+%goliath_npcs_alive = calc(%goliath_npcs_alive - 1); 

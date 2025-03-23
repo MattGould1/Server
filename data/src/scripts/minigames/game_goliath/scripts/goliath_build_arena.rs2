@@ -1,0 +1,49 @@
+[proc,goliath_build_arena]
+  def_coord $coord = ^goliath_start_coord;
+  def_int $duration = 200;
+  def_int $size = 30;
+  def_int $east = 0;
+  def_int $north = 0;
+  def_int $west = 0;
+  def_int $south = 0;
+
+  while ($size > $east) {
+    loc_add(movecoord($coord, 15, 0, calc($east - 15)), castlewall, 2, wall_straight, $duration); 
+    $east = calc($east + 1);
+  }
+  while ($size > $north) {
+    loc_add(movecoord($coord, calc($north - 15), 0, 15), castlewall, 1, wall_straight, $duration); 
+    $north = calc($north + 1);
+  }
+  while ($size > $south) {
+    loc_add(movecoord($coord, calc($south - 15), 0, -16), castlewall, 3, wall_straight, $duration); 
+    $south = calc($south + 1);
+  }
+  while ($size > $west) {
+    loc_add(movecoord($coord, -16, 0, calc($west - 15)), castlewall, 0, wall_straight, $duration); 
+    $west = calc($west + 1);
+  }
+
+  // south east wall piece
+  loc_add(movecoord($coord, 15, 0, -16), castlewall, 2, wall_diagonal, $duration); 
+  // north east wall piece
+  loc_add(movecoord($coord, 15, 0, 15), castlewall, 1, wall_diagonal, $duration); 
+  // south west wall piece
+  loc_add(movecoord($coord, -16, 0, 15), castlewall, 0, wall_diagonal, $duration); 
+    // north east wall piece
+  loc_add(movecoord($coord, -16, 0, -16), castlewall, 3, wall_diagonal, $duration); 
+
+  loc_add(0_42_74_45_48, oak_tree, 1, centrepiece_straight, $duration);
+
+  loc_add(movecoord($coord, -10, 0, -10), oak_tree, 1, centrepiece_straight, $duration);
+  loc_add(movecoord($coord, -8, 0, -2), oak_tree, 1, centrepiece_straight, $duration);
+  loc_add(movecoord($coord, -10, 0, 5), oak_tree, 1, centrepiece_straight, $duration);
+  loc_add(movecoord($coord, -2, 0, 10), oak_tree, 1, centrepiece_straight, $duration);
+  loc_add(movecoord($coord, 13, 0, -10), oak_tree, 1, centrepiece_straight, $duration);
+  loc_add(movecoord($coord, 10, 0, 14), oak_tree, 1, centrepiece_straight, $duration);
+  loc_add(movecoord($coord, 3, 0, 5), oak_tree, 1, centrepiece_straight, $duration);
+  loc_add(movecoord($coord, 12, 0, -8), oak_tree, 1, centrepiece_straight, $duration);
+  loc_add(movecoord($coord, 2, 0, -14), oak_tree, 1, centrepiece_straight, $duration);
+
+
+  

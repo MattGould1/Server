@@ -1,0 +1,15 @@
+[proc,spawn_giant](coord $coord, npc $npc)
+  npc_add($coord, $npc, 200);
+  npc_say("Fee fi fo fum, I smell the blood of an Englishman...");
+
+
+[proc,round_one]
+  mes("What in gielinor is that thing!?");
+  %goliath_npcs_alive = 6;
+  
+  ~spawn_giant(movecoord(^goliath_npc_north_east_spawn_coord, 0, 0, 0),goliath_ogre_shaman_archer);
+  ~spawn_giant(movecoord(^goliath_npc_north_east_spawn_coord, 0, 0, 0), goliath_fire_giant);
+  ~spawn_giant(movecoord(^goliath_npc_east_spawn_coord, 0, 0, 0), goliath_fire_giant_wizard);
+  ~spawn_giant(movecoord(^goliath_npc_west_spawn_coord, 0, 0, 0), goliath_fire_giant_wizard);
+  ~spawn_giant(movecoord(^goliath_npc_south_east_spawn_coord, 0, 0, 0), goliath_ogre_shaman_archer);
+  ~spawn_giant(movecoord(^goliath_npc_south_west_spawn_coord, 0, 0, 0), goliath_fire_giant);

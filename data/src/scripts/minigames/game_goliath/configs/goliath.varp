@@ -1,0 +1,9 @@
+// [varp_295]
+// scope=temp
+
+[goliath_round]
+scope=temp
+
+[goliath_floor_crumbles_coord]
+scope=temp
+type=coord
